@@ -1,0 +1,22 @@
+{
+  "name": "Quebits - AI Solutions",
+  "short_name": "Quebits",
+  "description": "We design and build custom AI systems, software and interfaces for businesses.",
+  "start_url": "/",
+  "display": "standalone",
+  "categories": ["business", "productivity", "technology", "startup"],
+  "background_color": "#ffffff",
+  "theme_color": "#f8a22c",
+  "icons": [
+    {
+      "src": "/public/icons/icon.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/public/icons/icon.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
