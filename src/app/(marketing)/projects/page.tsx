@@ -2,8 +2,6 @@ import Wrapper from "@/components/global/wrapper";
 import Roadmap, { Post } from "@/components/marketing/projects-container";
 import React, { HTMLAttributes } from "react";
 
-import { client } from "@/sanity/lib/client";
-import { groq } from "next-sanity";
 import { twMerge } from "tailwind-merge";
 
 import type { Metadata } from "next";
@@ -34,33 +32,12 @@ export const metadata: Metadata = {
   },
 };
 
-const query = groq`
-  *[_type=="post"] {
-    ...,
-    "mainImage": mainImage.asset->url,
-  } 
-`;
-
-const fetchPosts = async () => {
-  try {
-    const posts = await client.fetch(query);
-    return posts;
-  } catch (error) {
-    console.error("Error fetching posts:", error);
-    return null;
-  }
-};
-
 export const revalidate = 0;
 
 const ProjectPage = async () => {
-  const posts: Post[] = await fetchPosts();
 
   return (
     <>
-      <Wrapper>
-        <Roadmap posts={posts} />
-      </Wrapper>
       <VoiceFlowWidget />
     </>
   );
