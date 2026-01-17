@@ -14,32 +14,12 @@ import Roadmap, { Post } from "@/components/marketing/projects-container";
 import NewsletterSection from "@/components/marketing/subscription";
 import TestimonialsSection from "@/components/marketing/testimonial-section";
 import VoiceFlowWidget from "@/components/marketing/voicecmd";
-import { client } from "@/sanity/lib/client";
-import { groq } from "next-sanity";
 
-const query = groq`
-  *[_type=="post"] {
-    ...,
-    "mainImage": mainImage.asset->url,
-  } 
-`;
-
-const fetchPosts = async () => {
-  try {
-    const posts = await client.fetch(query);
-    return posts;
-  } catch (error) {
-    console.error("Error fetching posts:", error);
-    return null;
-  }
-};
 
 export const revalidate = 0;
 
 const HomePage = async () => {
-  const posts: Post[] = await fetchPosts();
 
-  const filterPosts: Post[] = posts.filter((_, i) => i < 6);
   return (
     <>
       <Wrapper className="py-10 relative">
@@ -50,9 +30,6 @@ const HomePage = async () => {
       </Wrapper>
       <Features />
       <Wrapper className="">
-        <Roadmap posts={filterPosts} />
-      </Wrapper>
-      <Wrapper className="">
         <Analysis />
       </Wrapper>
       <Pricing />
@@ -62,9 +39,6 @@ const HomePage = async () => {
       <Wrapper className="">
         <CTA />
       </Wrapper>
-      {/* <Wrapper className=""> */}
-      <BlogSection />
-      {/* </Wrapper> */}
       <Wrapper className="">
         <Faqs />
       </Wrapper>
